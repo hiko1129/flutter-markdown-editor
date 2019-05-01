@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:bloc_provider/bloc_provider.dart';
+import 'package:markdown_editor/bloc/editor_bloc.dart';
 
-class Home extends StatefulWidget {
+class Editor extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _EditorState createState() => _EditorState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+class _EditorState extends State<Editor> with SingleTickerProviderStateMixin {
   TabController _tabController;
-  String text = '';
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<EditorBloc>(context);
+
     const TextStyle style = TextStyle(
       color: Colors.black,
     );
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -37,9 +41,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             margin: EdgeInsets.all(20),
             child: TextField(
               maxLines: null,
-              onChanged: (value) => {
-                    setState(() => {this.text = value})
-                  },
+              onChanged: (value) => {bloc.content.add(value)},
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: 'INPUT TEXT',
@@ -48,7 +50,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           Container(
             margin: EdgeInsets.all(20),
-            child: MarkdownBody(data: text),
+            child: StreamBuilder<String>(
+              stream: bloc.content,
+              initialData: bloc.content.value,
+              builder: (context, snap) {
+                return MarkdownBody(data: snap.data);
+              },
+            ),
           ),
         ],
       ),

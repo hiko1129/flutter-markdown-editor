@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.8"
+  bloc_provider:
+    dependency: "direct main"
+    description:
+      name: bloc_provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -102,6 +109,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  rxdart:
+    dependency: "direct main"
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.21.0"
   sky_engine:
     dependency: transitive
     description: flutter
