@@ -51,7 +51,7 @@ class Editor extends StatelessWidget {
                 onChanged: (value) => {bloc.content.add(value)},
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'INPUT TEXT',
+                  hintText: '# h1\n## h2\n### h3',
                 ),
               ),
             ),
